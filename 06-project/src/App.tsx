@@ -7,7 +7,6 @@ export default function StreamInterface() {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const [filter, setFilter] = useState("");
 
   // FETCH DATA WITH PAGINATION
   const fetchData = async (pageNum: number) => {
@@ -37,14 +36,6 @@ export default function StreamInterface() {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    try {
-      const filteredVideos = videos.filter((video) =>
-        video.items.snippet.title.toLowerCase().includes(filter.toLowerCase()),
-      );
-    } catch (error) {}
-  }, [filter, videos]);
 
   useEffect(() => {
     fetchData(1);
