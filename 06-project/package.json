@@ -1,5 +1,5 @@
 {
-  "name": "05-project",
+  "name": "06-project",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -13,11 +13,9 @@
     "@tailwindcss/vite": "^4.2.4",
     "@tanstack/react-router": "^1.169.1",
     "@tanstack/react-router-devtools": "^1.166.13",
-    "jwt-decode": "^4.0.0",
-    "motion": "^12.38.0",
+    "framer-motion": "^12.38.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "react-hook-form": "^7.75.0",
     "tailwindcss": "^4.2.4"
   },
   "devDependencies": {
