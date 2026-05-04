@@ -32,7 +32,7 @@ export default function RouteComponent() {
   const [status, setStatus] = useState<"SYNCING" | "STABLE" | "OFFLINE">(
     "SYNCING",
   );
-  const [check, setCheck] = useState(false);
+
 
   useEffect(() => {
     const token = localStorage.getItem("token");
