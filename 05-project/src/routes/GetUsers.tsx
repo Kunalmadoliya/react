@@ -1,5 +1,6 @@
-import { useNavigate, createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import {useNavigate, createFileRoute} from "@tanstack/react-router";
+import {use, useEffect, useState} from "react";
+import GetVideos from "./GetVideos";
 
 export const Route = createFileRoute("/GetUsers")({
   component: RouteComponent,
@@ -28,7 +29,10 @@ const NavAnchor = ({
 export default function RouteComponent() {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
-  const [status, setStatus] = useState<"SYNCING" | "STABLE" | "OFFLINE">("SYNCING");
+  const [status, setStatus] = useState<"SYNCING" | "STABLE" | "OFFLINE">(
+    "SYNCING",
+  );
+  const [check, setCheck] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -58,7 +62,7 @@ export default function RouteComponent() {
           setStatus("STABLE");
         } else {
           setStatus("OFFLINE");
-          navigate({ to: "/Login" });
+          navigate({to: "/Login"});
         }
       } catch (err) {
         console.error("SYS_FETCH_ERR", err);
@@ -71,7 +75,7 @@ export default function RouteComponent() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate({ to: "/Login" });
+    navigate({to: "/Login"});
   };
 
   return (
@@ -80,7 +84,6 @@ export default function RouteComponent() {
 
       {/* FIXED NAVBAR - SCALED FOR LEGIBILITY */}
       <nav className="fixed top-0 left-0 w-full h-16 bg-[#0c0d0e]/90 backdrop-blur-md border-b border-white/10 z-[100] flex justify-between items-stretch">
-        
         {/* LEFT: BRANDING (Scaled Up) */}
         <NavAnchor className="border-l-0">
           <div className="flex items-center gap-4">
@@ -101,12 +104,14 @@ export default function RouteComponent() {
 
         {/* MIDDLE: USER IDENTITY (Increased visibility) */}
         <div className="flex-1 flex items-center px-8 border-x border-white/5">
-           <div className="flex items-center gap-3">
-              <span className="text-[10px] text-zinc-600 uppercase tracking-widest font-bold">Session_Owner:</span>
-              <span className="text-xs text-blue-400 font-bold tracking-tight">
-                {user ? user.username?.toUpperCase() : "IDENTIFYING..."}
-              </span>
-           </div>
+          <div className="flex items-center gap-3">
+            <span className="text-[10px] text-zinc-600 uppercase tracking-widest font-bold">
+              Session_Owner:
+            </span>
+            <span className="text-xs text-blue-400 font-bold tracking-tight">
+              {user ? user.username?.toUpperCase() : "IDENTIFYING..."}
+            </span>
+          </div>
         </div>
 
         {/* RIGHT: SYSTEM STATUS & TERMINATE */}
@@ -120,7 +125,9 @@ export default function RouteComponent() {
                 className={`w-2 h-2 rounded-full ${status === "STABLE" ? "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]" : "bg-red-500"} animate-pulse`}
               />
             </div>
-            <span className="text-[11px] text-zinc-400 font-bold">{status}</span>
+            <span className="text-[11px] text-zinc-400 font-bold">
+              {status}
+            </span>
           </div>
 
           <button
@@ -139,9 +146,13 @@ export default function RouteComponent() {
       <main className="relative z-10 pt-20 flex flex-col min-h-screen">
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center p-12 border border-dashed border-white/10 bg-white/[0.02]">
-            <p className="text-xs text-zinc-500 uppercase tracking-[0.4em] animate-pulse">
-              System_Operational // Awaiting_Module
-            </p>
+            {user ? (
+              <GetVideos />
+            ) : (
+              <p className="text-xs text-zinc-500 uppercase tracking-[0.4em] animate-pulse">
+                System_Operational // Awaiting_Module
+              </p>
+            )}
           </div>
         </div>
       </main>

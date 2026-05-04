@@ -9,17 +9,12 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as RegisterRouteImport } from './routes/Register'
 import { Route as LoginRouteImport } from './routes/Login'
+import { Route as GetVideosRouteImport } from './routes/GetVideos'
 import { Route as GetUsersRouteImport } from './routes/GetUsers'
 import { Route as IndexRouteImport } from './routes/index'
 
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const RegisterRoute = RegisterRouteImport.update({
   id: '/Register',
   path: '/Register',
@@ -28,6 +23,11 @@ const RegisterRoute = RegisterRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/Login',
   path: '/Login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GetVideosRoute = GetVideosRouteImport.update({
+  id: '/GetVideos',
+  path: '/GetVideos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GetUsersRoute = GetUsersRouteImport.update({
@@ -44,50 +44,43 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/GetUsers': typeof GetUsersRoute
+  '/GetVideos': typeof GetVideosRoute
   '/Login': typeof LoginRoute
   '/Register': typeof RegisterRoute
-  '/about': typeof AboutRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/GetUsers': typeof GetUsersRoute
+  '/GetVideos': typeof GetVideosRoute
   '/Login': typeof LoginRoute
   '/Register': typeof RegisterRoute
-  '/about': typeof AboutRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/GetUsers': typeof GetUsersRoute
+  '/GetVideos': typeof GetVideosRoute
   '/Login': typeof LoginRoute
   '/Register': typeof RegisterRoute
-  '/about': typeof AboutRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/GetUsers' | '/Login' | '/Register' | '/about'
+  fullPaths: '/' | '/GetUsers' | '/GetVideos' | '/Login' | '/Register'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/GetUsers' | '/Login' | '/Register' | '/about'
-  id: '__root__' | '/' | '/GetUsers' | '/Login' | '/Register' | '/about'
+  to: '/' | '/GetUsers' | '/GetVideos' | '/Login' | '/Register'
+  id: '__root__' | '/' | '/GetUsers' | '/GetVideos' | '/Login' | '/Register'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GetUsersRoute: typeof GetUsersRoute
+  GetVideosRoute: typeof GetVideosRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
-  AboutRoute: typeof AboutRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/Register': {
       id: '/Register'
       path: '/Register'
@@ -100,6 +93,13 @@ declare module '@tanstack/react-router' {
       path: '/Login'
       fullPath: '/Login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/GetVideos': {
+      id: '/GetVideos'
+      path: '/GetVideos'
+      fullPath: '/GetVideos'
+      preLoaderRoute: typeof GetVideosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/GetUsers': {
@@ -122,9 +122,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GetUsersRoute: GetUsersRoute,
+  GetVideosRoute: GetVideosRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
-  AboutRoute: AboutRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
