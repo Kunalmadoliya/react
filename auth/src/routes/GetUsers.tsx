@@ -2,7 +2,9 @@ import {useNavigate, createFileRoute} from "@tanstack/react-router";
 import {useEffect, useState} from "react";
 import GetVideos from "./GetVideos";
 import GetProduct from "./GetProduct";
-import GetRandomUser from "./GetRandomuser";
+import RandomUser from "./RandomUser";
+import GetJokes from "./GetJokes";
+import GetQoutes from "./GetQuotes";
 
 export const Route = createFileRoute("/GetUsers")({
   component: RouteComponent,
@@ -83,12 +85,10 @@ export default function RouteComponent() {
     <div className="min-h-screen bg-[#0c0d0e] text-[#a1a1aa] font-mono selection:bg-blue-500 selection:text-white relative overflow-hidden">
       <div className="fixed inset-0 z-0 opacity-20 [background-image:radial-gradient(#444_1px,transparent_1.5px)] [background-size:32px_32px] pointer-events-none" />
 
-      {/* FIXED NAVBAR - SCALED FOR LEGIBILITY */}
+      {/* FIXED NAVBAR */}
       <nav className="fixed top-0 left-0 w-full h-16 bg-[#0c0d0e]/90 backdrop-blur-md border-b border-white/10 z-[100] flex justify-between items-stretch">
-        {/* LEFT: BRANDING (Scaled Up) */}
         <NavAnchor className="border-l-0">
           <div className="flex items-center gap-4">
-            {/* Increased logo size and font */}
             <div className="w-8 h-8 border border-white/30 flex items-center justify-center text-[11px] font-black text-white">
               AUTH
             </div>
@@ -103,7 +103,6 @@ export default function RouteComponent() {
           </div>
         </NavAnchor>
 
-        {/* MIDDLE: USER IDENTITY (Increased visibility) */}
         <div className="flex-1 flex items-center px-8 border-x border-white/5">
           <div className="flex items-center gap-3">
             <span className="text-[10px] text-zinc-600 uppercase tracking-widest font-bold">
@@ -115,7 +114,6 @@ export default function RouteComponent() {
           </div>
         </div>
 
-        {/* RIGHT: SYSTEM STATUS & TERMINATE */}
         <NavAnchor className="border-r-0">
           <div className="hidden sm:flex flex-col items-end mr-6">
             <div className="flex items-center gap-2">
@@ -123,7 +121,11 @@ export default function RouteComponent() {
                 Status
               </span>
               <div
-                className={`w-2 h-2 rounded-full ${status === "STABLE" ? "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]" : "bg-red-500"} animate-pulse`}
+                className={`w-2 h-2 rounded-full ${
+                  status === "STABLE"
+                    ? "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]"
+                    : "bg-red-500"
+                } animate-pulse`}
               />
             </div>
             <span className="text-[11px] text-zinc-400 font-bold">
@@ -144,62 +146,107 @@ export default function RouteComponent() {
       </nav>
 
       {/* MAIN CONTENT AREA */}
-      <main className="relative z-10 pt-20 flex flex-col min-h-screen">
-        <div className="flex-1 flex items-center justify-center">
-          <div className="w-full max-w-6xl mx-auto px-6">
+      <main className="relative z-10 pt-24 pb-12 flex flex-col min-h-screen">
+        <div className="flex-1 flex items-start justify-center">
+          <div className="w-full max-w-7xl mx-auto px-6">
             {user ? (
-              <div className="space-y-8 animate-in fade-in zoom-in-95 duration-700">
-                {/* SYSTEM HEADER */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-white/5 pb-6 gap-4">
-                  <div>
-                    <p className="text-blue-500 text-[10px] font-black tracking-[0.5em] uppercase mb-2">
-                      Module_Deployment // 02_Units_Active
-                    </p>
-                    <h2 className="text-3xl font-black text-white tracking-tighter uppercase italic">
-                      Project_Registry
-                    </h2>
-                  </div>
-                  <div className="flex gap-8">
-                    <div>
-                      <span className="block text-[8px] text-zinc-600 uppercase font-bold tracking-widest">
-                        Environment
-                      </span>
-                      <span className="text-[10px] text-zinc-400 font-mono">
-                        PRODUCTION_ALPHA
-                      </span>
-                    </div>
-                    <div>
-                      <span className="block text-[8px] text-zinc-600 uppercase font-bold tracking-widest">
-                        Latency
-                      </span>
-                      <span className="text-[10px] text-emerald-500 font-mono">
-                        14MS // STABLE
-                      </span>
-                    </div>
-                  </div>
-                </div>
+              <div className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+                {/* DASHBOARD HEADER */}
 
                 {/* GRID LAYOUT FOR CARDS */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-stretch">
-                  <div className="flex flex-col h-full">
-                    <GetVideos />
-                    <p className="mt-4 text-[9px] text-zinc-600 font-mono uppercase tracking-tight px-2">
-                      Ref: 01 // Streaming_Engine_V2
-                    </p>
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 items-stretch">
+                  {/* MODULE 1: VIDEOS */}
+                  <div className="flex flex-col h-full group">
+                    <div className="flex-1 bg-[#0c0d0e] relative z-10">
+                      <GetVideos />
+                    </div>
+                    <div className="mt-4 flex items-center justify-between px-2">
+                      <p className="text-xs text-zinc-500 font-bold uppercase tracking-widest group-hover:text-blue-400 transition-colors">
+                        Ref: 01 // Streaming_Engine
+                      </p>
+                      <div className="w-1.5 h-1.5 bg-white/10 group-hover:bg-blue-500 transition-colors rounded-full" />
+                    </div>
                   </div>
-                  <div className="flex flex-col h-full">
-                    <GetProduct />
-                    <p className="mt-4 text-[9px] text-zinc-600 font-mono uppercase tracking-tight px-2">
-                      Ref: 02 // Ecomm_Logistics_Module
-                    </p>
+
+                  {/* MODULE 2: E-COMMERCE */}
+                  <div className="flex flex-col h-full group">
+                    <div className="flex-1 bg-[#0c0d0e] relative z-10">
+                      <GetProduct />
+                    </div>
+                    <div className="mt-4 flex items-center justify-between px-2">
+                      <p className="text-xs text-zinc-500 font-bold uppercase tracking-widest group-hover:text-blue-400 transition-colors">
+                        Ref: 02 // Ecomm_Logistics
+                      </p>
+                      <div className="w-1.5 h-1.5 bg-white/10 group-hover:bg-blue-500 transition-colors rounded-full" />
+                    </div>
+                  </div>
+
+                  {/* MODULE 3: RANDOM USER */}
+                  <div className="flex flex-col h-full group">
+                    <div className="flex-1 bg-[#0c0d0e] relative z-10">
+                      <RandomUser />
+                    </div>
+                    <div className="mt-4 flex items-center justify-between px-2">
+                      <p className="text-xs text-zinc-500 font-bold uppercase tracking-widest group-hover:text-blue-400 transition-colors">
+                        Ref: 03 // Bio_Auth_Registry
+                      </p>
+                      <div className="w-1.5 h-1.5 bg-white/10 group-hover:bg-blue-500 transition-colors rounded-full" />
+                    </div>
+                  </div>
+
+                  {/* MODULE 4: QUOTES */}
+                  <div className="flex flex-col h-full group">
+                    <div className="flex-1 bg-[#0c0d0e] relative z-10">
+                      <GetQoutes />
+                    </div>
+                    <div className="mt-4 flex items-center justify-between px-2">
+                      <p className="text-xs text-zinc-500 font-bold uppercase tracking-widest group-hover:text-blue-400 transition-colors">
+                        Ref: 04 // Wisdom_Archive
+                      </p>
+                      <div className="w-1.5 h-1.5 bg-white/10 group-hover:bg-blue-500 transition-colors rounded-full" />
+                    </div>
+                  </div>
+
+                  {/* MODULE 5: JOKES */}
+                  <div className="flex flex-col h-full group">
+                    <div className="flex-1 bg-[#0c0d0e] relative z-10">
+                      <GetJokes />
+                    </div>
+                    <div className="mt-4 flex items-center justify-between px-2">
+                      <p className="text-xs text-zinc-500 font-bold uppercase tracking-widest group-hover:text-blue-400 transition-colors">
+                        Ref: 05 // Neural_Humor_Link
+                      </p>
+                      <div className="w-1.5 h-1.5 bg-white/10 group-hover:bg-blue-500 transition-colors rounded-full" />
+                    </div>
+                  </div>
+
+                  {/* MODULE 6: EMPTY SLOT (Awaiting Deployment) */}
+                  <div className="flex flex-col h-full opacity-50 hover:opacity-100 transition-opacity duration-500">
+                    <div className="flex-1 border border-dashed border-white/10 bg-white/[0.01] flex flex-col items-center justify-center min-h-[300px] relative overflow-hidden group p-6">
+                      <div className="w-12 h-12 border border-white/10 flex items-center justify-center mb-4 group-hover:border-blue-500/50 transition-colors">
+                        <span className="text-xl text-zinc-600 group-hover:text-blue-500">
+                          +
+                        </span>
+                      </div>
+                      <p className="text-xs font-black uppercase tracking-widest text-zinc-500 group-hover:text-zinc-300">
+                        Awaiting_Deployment
+                      </p>
+                      <p className="text-[10px] text-zinc-700 font-mono mt-2 text-center">
+                        Slot reserved for future system expansion.
+                      </p>
+                    </div>
+                    <div className="mt-4 flex items-center justify-between px-2">
+                      <p className="text-xs text-zinc-600 font-bold uppercase tracking-widest">
+                        Ref: 06 // NULL_NODE
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             ) : (
               /* LOADING STATE */
-              <div className="py-32 flex flex-col items-center justify-center border border-dashed border-white/10 bg-white/[0.02] relative overflow-hidden">
+              <div className="mt-20 py-32 flex flex-col items-center justify-center border border-dashed border-white/10 bg-white/[0.02] relative overflow-hidden">
                 <div className="absolute inset-0 opacity-[0.02] [background-image:radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]" />
-
                 <div className="relative flex flex-col items-center">
                   <div className="w-12 h-12 border-2 border-zinc-800 border-t-blue-500 rounded-full animate-spin mb-6" />
                   <p className="text-xs text-zinc-500 uppercase tracking-[0.5em] animate-pulse font-black">
