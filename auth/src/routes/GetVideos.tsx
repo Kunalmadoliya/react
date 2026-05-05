@@ -9,7 +9,7 @@ export default function RouteComponent() {
   return (
     <div className="flex items-center justify-center p-4">
       <a
-        href="https://yt-projet.vercel.app"
+        href="https://youtube-zeta-ivory.vercel.app"
         target="_blank"
         rel="noopener noreferrer"
         className="block w-full max-w-md outline-none group"

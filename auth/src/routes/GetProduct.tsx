@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 export default function AccessTerminal() {
-  const uri = "https://product-ten-swart.vercel.app";
+  const uri = "https://product-navy-eight.vercel.app";
 
   return (
     <div className="flex items-center justify-center p-4">
