@@ -2,6 +2,7 @@ import {useNavigate, createFileRoute} from "@tanstack/react-router";
 import {useEffect, useState} from "react";
 import GetVideos from "./GetVideos";
 import GetProduct from "./GetProduct";
+import GetRandomUser from "./GetRandomuser";
 
 export const Route = createFileRoute("/GetUsers")({
   component: RouteComponent,
