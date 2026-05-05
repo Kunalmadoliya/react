@@ -1,6 +1,7 @@
 import {useNavigate, createFileRoute} from "@tanstack/react-router";
-import { useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import GetVideos from "./GetVideos";
+import GetProduct from "./GetProduct";
 
 export const Route = createFileRoute("/GetUsers")({
   component: RouteComponent,
@@ -32,7 +33,6 @@ export default function RouteComponent() {
   const [status, setStatus] = useState<"SYNCING" | "STABLE" | "OFFLINE">(
     "SYNCING",
   );
-
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -145,13 +145,70 @@ export default function RouteComponent() {
       {/* MAIN CONTENT AREA */}
       <main className="relative z-10 pt-20 flex flex-col min-h-screen">
         <div className="flex-1 flex items-center justify-center">
-          <div className="text-center p-12 border border-dashed border-white/10 bg-white/[0.02]">
+          <div className="w-full max-w-6xl mx-auto px-6">
             {user ? (
-              <GetVideos />
+              <div className="space-y-8 animate-in fade-in zoom-in-95 duration-700">
+                {/* SYSTEM HEADER */}
+                <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-white/5 pb-6 gap-4">
+                  <div>
+                    <p className="text-blue-500 text-[10px] font-black tracking-[0.5em] uppercase mb-2">
+                      Module_Deployment // 02_Units_Active
+                    </p>
+                    <h2 className="text-3xl font-black text-white tracking-tighter uppercase italic">
+                      Project_Registry
+                    </h2>
+                  </div>
+                  <div className="flex gap-8">
+                    <div>
+                      <span className="block text-[8px] text-zinc-600 uppercase font-bold tracking-widest">
+                        Environment
+                      </span>
+                      <span className="text-[10px] text-zinc-400 font-mono">
+                        PRODUCTION_ALPHA
+                      </span>
+                    </div>
+                    <div>
+                      <span className="block text-[8px] text-zinc-600 uppercase font-bold tracking-widest">
+                        Latency
+                      </span>
+                      <span className="text-[10px] text-emerald-500 font-mono">
+                        14MS // STABLE
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* GRID LAYOUT FOR CARDS */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-stretch">
+                  <div className="flex flex-col h-full">
+                    <GetVideos />
+                    <p className="mt-4 text-[9px] text-zinc-600 font-mono uppercase tracking-tight px-2">
+                      Ref: 01 // Streaming_Engine_V2
+                    </p>
+                  </div>
+                  <div className="flex flex-col h-full">
+                    <GetProduct />
+                    <p className="mt-4 text-[9px] text-zinc-600 font-mono uppercase tracking-tight px-2">
+                      Ref: 02 // Ecomm_Logistics_Module
+                    </p>
+                  </div>
+                </div>
+              </div>
             ) : (
-              <p className="text-xs text-zinc-500 uppercase tracking-[0.4em] animate-pulse">
-                System_Operational // Awaiting_Module
-              </p>
+              /* LOADING STATE */
+              <div className="py-32 flex flex-col items-center justify-center border border-dashed border-white/10 bg-white/[0.02] relative overflow-hidden">
+                <div className="absolute inset-0 opacity-[0.02] [background-image:radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]" />
+
+                <div className="relative flex flex-col items-center">
+                  <div className="w-12 h-12 border-2 border-zinc-800 border-t-blue-500 rounded-full animate-spin mb-6" />
+                  <p className="text-xs text-zinc-500 uppercase tracking-[0.5em] animate-pulse font-black">
+                    System_Operational // Awaiting_Auth_Handshake
+                  </p>
+                  <p className="mt-2 text-[10px] text-zinc-700 font-mono">
+                    TRACING_ROUTE... [OK]
+                  </p>
+                </div>
+              </div>
             )}
           </div>
         </div>
