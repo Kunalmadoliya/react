@@ -5,6 +5,8 @@ import GetProduct from "./GetProduct";
 import RandomUser from "./RandomUser";
 import GetJokes from "./GetJokes";
 import GetQoutes from "./GetQuotes";
+import GetCats from "./GetCats";
+import GetMeals from "./GetMeal";
 
 export const Route = createFileRoute("/GetUsers")({
   component: RouteComponent,
@@ -211,6 +213,28 @@ export default function RouteComponent() {
                   <div className="flex flex-col h-full group">
                     <div className="flex-1 bg-[#0c0d0e] relative z-10">
                       <GetJokes />
+                    </div>
+                    <div className="mt-4 flex items-center justify-between px-2">
+                      <p className="text-xs text-zinc-500 font-bold uppercase tracking-widest group-hover:text-blue-400 transition-colors">
+                        Ref: 05 // Neural_Humor_Link
+                      </p>
+                      <div className="w-1.5 h-1.5 bg-white/10 group-hover:bg-blue-500 transition-colors rounded-full" />
+                    </div>
+                  </div>
+                  <div className="flex flex-col h-full group">
+                    <div className="flex-1 bg-[#0c0d0e] relative z-10">
+                      <GetCats/>
+                    </div>
+                    <div className="mt-4 flex items-center justify-between px-2">
+                      <p className="text-xs text-zinc-500 font-bold uppercase tracking-widest group-hover:text-blue-400 transition-colors">
+                        Ref: 05 // Neural_Humor_Link
+                      </p>
+                      <div className="w-1.5 h-1.5 bg-white/10 group-hover:bg-blue-500 transition-colors rounded-full" />
+                    </div>
+                  </div>
+                  <div className="flex flex-col h-full group">
+                    <div className="flex-1 bg-[#0c0d0e] relative z-10">
+                      <GetMeals/>
                     </div>
                     <div className="mt-4 flex items-center justify-between px-2">
                       <p className="text-xs text-zinc-500 font-bold uppercase tracking-widest group-hover:text-blue-400 transition-colors">
